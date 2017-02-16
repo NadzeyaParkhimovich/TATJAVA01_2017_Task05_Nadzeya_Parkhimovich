@@ -26,9 +26,8 @@ public class SaxDemo {
 		  for (Map.Entry<String, ArrayList> entry : menu.entrySet()) {
 			  System.out.println(entry.getKey());
 			  ArrayList<Food> meals = entry.getValue();
-			  System.out.println("Name | Description | Weight");
 			  for (Food food : meals) {
-				  System.out.println(food.getName() + " | " + food.getDescription() + " | " + food.getWeight());
+				  System.out.println(food.toString());
 			  }
 		  }
 	} 

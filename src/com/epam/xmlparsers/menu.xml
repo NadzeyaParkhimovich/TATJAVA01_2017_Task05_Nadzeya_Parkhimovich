@@ -1,54 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <menu  xmlns="http://www.example.org/menuType" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.example.org/menuType menuType.xsd">
 	<type id="coldSnacks">
-		<food id="1">
+		<food id="C1">
 			<name>Ассорти рыбное</name>
 			<description>Слабосоленая форель, семга</description>
-			<weight>45</weight>
+			<weight>100/20/15</weight>
+			<price></price>
 		</food>
-		<food id="2">
+		<food id="C2">
 			<name>Тарталетки с красной икрой</name>
 			<description>Тарталетки с красной икрой</description>
-			<weight>110</weight>
+			<weight>60/50</weight>
+			<price></price>
 		</food>
-		<food id="3">
+		<food id="C3">
 			<name>Бастурма</name>
 			<description>Вяленая вырезка из говяжьего мяса</description>
-			<weight>55</weight>
+			<weight>50/5</weight>
+			<price></price>
 		</food>
-		<food id="4">
+		<food id="C4">
 			<name>Брынза</name>
 			<description>Рассольный сыр</description>
-			<weight>80</weight>
+			<weight>75/5</weight>
+			<price></price>
 		</food>
 	</type>
 	<type id="hotSnacks">
-		<food id="1">
+		<food id="H1">
 			<name>Лобио с шампиньонами</name>
 			<description>Фасоль с шампиньонами и грецким орехом</description>
-			<weight>155</weight>
+			<weight>150/5</weight>
+			<price>105</price>
 		</food>
-		<food id="2">
+		<food id="H2">
 			<name>Жульен</name>
-			<description>1. с курицей 2. с грибами</description>
-			<weight>121</weight>
+			<description>1. с курицей</description>
+			<weight>120/1</weight>
+			<price>165</price>
 		</food>
 	</type>
 	<type id="breakfast">
-		<food id="1">
+		<food id="B1">
 			<name>Глазунья</name>
 			<description>2 яйца</description>
 			<weight>150</weight>
+			<price></price>
 		</food>
-		<food id="2">
+		<food id="B2">
 			<name>Омлет</name>
 			<description></description>
 			<weight>100</weight>
+			<price></price>
 		</food>
-		<food id="3">
+		<food id="B3">
 			<name>Блинчики с мясом</name>
 			<description>Жареные блинчики с мясом</description>
 			<weight>150</weight>
+			<price></price>
 		</food>
 	</type>
 </menu>

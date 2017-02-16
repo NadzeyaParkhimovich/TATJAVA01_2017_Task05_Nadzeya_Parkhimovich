@@ -6,5 +6,6 @@ public enum MenuTagName {
 	FOOD,
 	NAME,
 	DESCRIPTION,
-	WEIGHT;
+	WEIGHT,
+	PRICE;
 }

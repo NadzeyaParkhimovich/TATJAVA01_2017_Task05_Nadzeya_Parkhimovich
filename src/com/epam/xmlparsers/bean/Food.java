@@ -4,17 +4,20 @@ public class Food {
 	
 	private String name;
 	private String description;
-	private int weight;
-	private int id;
+	private String weight;
+	private String id;
+	private int price;
 	
 	public Food() {
 		
 	}
 	
-	public Food(String name, String description, int weight) {
+	public Food(String name, String description, String weight, String id, int price) {
 		this.name = name;
 		this.description = description;
 		this.weight = weight;
+		this.id = id;
+		this.price = price;
 	}
 
 	public String getName() {
@@ -33,20 +36,28 @@ public class Food {
 		this.description = description;
 	}
 
-	public int getWeight() {
+	public String getWeight() {
 		return weight;
 	}
 
-	public void setWeight(int weight) {
+	public void setWeight(String weight) {
 		this.weight = weight;
 	}
 	
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
 	}
 
 	@Override
@@ -54,9 +65,10 @@ public class Food {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + id;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + weight;
+		result = prime * result + price;
+		result = prime * result + ((weight == null) ? 0 : weight.hashCode());
 		return result;
 	}
 
@@ -74,16 +86,31 @@ public class Food {
 				return false;
 		} else if (!description.equals(other.description))
 			return false;
-		if (id != other.id)
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (weight != other.weight)
+		if (price != other.price)
+			return false;
+		if (weight == null) {
+			if (other.weight != null)
+				return false;
+		} else if (!weight.equals(other.weight))
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Food [name=" + name + ", description=" + description + ", weight=" + weight + ", price="
+				+ price + ", id=" + id + "]";
+	}
+
 
 }

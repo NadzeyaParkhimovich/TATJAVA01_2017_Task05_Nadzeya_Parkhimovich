@@ -11,7 +11,15 @@
 		<sequence>
 			<element name="food" type="tns:Food" minOccurs="1"  maxOccurs="unbounded" />
 		</sequence>
-		<attribute name="id" type="string" use="required" />
+		<attribute name="id">
+			<simpleType>
+				<restriction base="string">
+					<enumeration value="coldSnacks"/>
+					<enumeration value="hotSnacks"/>
+					<enumeration value="breakfast"/>
+				</restriction>
+			</simpleType>
+		</attribute>
 	</complexType>
 	<complexType name="Food">
 		<sequence>
@@ -19,12 +27,13 @@
 			<element name="description" type="string" />
 			<element name="weight">
 				<simpleType>
-					<restriction base="int">
-						<minInclusive value="1"/>
+					<restriction base="string">
+						<pattern value="[\d/]*"/>
 					</restriction>
 				</simpleType>
 			</element>
+			<element name="price" type="nonNegativeInteger" default="0"/>
 		</sequence>
-		<attribute name="id" type="int" use="required" />
+		<attribute name="id" type="ID" use="required" />
 	</complexType>
 </schema>

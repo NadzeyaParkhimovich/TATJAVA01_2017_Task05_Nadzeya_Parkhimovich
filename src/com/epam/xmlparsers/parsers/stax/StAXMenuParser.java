@@ -1,50 +1,53 @@
-package com.epam.xmlparsers.stax;
+package com.epam.xmlparsers.parsers.stax;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.epam.xmlparsers.bean.Food;
 import com.epam.xmlparsers.bean.MenuTagName;
+import com.epam.xmlparsers.parsers.ParserException;
 
 public class StAXMenuParser { 
 	 
-	 public static void main(String[] args) throws FileNotFoundException {   
+	 private static final Logger LOG = LogManager.getRootLogger();
+	
+	 public static HashMap<String, ArrayList<Food>> parse(String file_path) throws ParserException {   
+		 
 		 XMLInputFactory inputFactory = XMLInputFactory.newInstance();
+		 HashMap<String, ArrayList<Food>> menu = null;
 		 try {
-			 InputStream input = new FileInputStream("D:/Projects/XMLParsers/src/com/epam/xmlparsers/menu.xml"); 
+			 InputStream input = new FileInputStream(file_path); 
 			 XMLStreamReader reader = inputFactory.createXMLStreamReader(input);
 			 
-			 HashMap<String, ArrayList> menu = process(reader);
-			 for (Map.Entry<String, ArrayList> entry : menu.entrySet()) {
-				  System.out.println(entry.getKey());
-				  ArrayList<Food> meals = entry.getValue();
-				  for (Food food : meals) {
-					  System.out.println(food.toString());
-				  }
-			
-			 }   
-		 } catch (XMLStreamException e) {    
-			 e.printStackTrace();   
-		 } 
+			 menu = process(reader);
+			   
+		 } catch (XMLStreamException | FileNotFoundException e) {    
+			 LOG.error(e); 
+			 throw new ParserException(e);
+		 }
+		return menu; 
+		 
 	 } 
 	 
-	 private static  HashMap<String, ArrayList> process(XMLStreamReader reader) throws XMLStreamException {   
+	 private static  HashMap<String, ArrayList<Food>> process(XMLStreamReader reader) throws XMLStreamException {   
 		 ArrayList<Food> foodList = null;
-		 HashMap<String, ArrayList> menu = new HashMap<String, ArrayList>();
+		 HashMap<String, ArrayList<Food>> menu = new HashMap<String, ArrayList<Food>>();
 		 Food food = null;
 		 String type = null;
 		 MenuTagName elementName = null;
 		 while (reader.hasNext()) {
-			 // определение типа "прочтённого" элемента (тега)    
+			 
 			 int element = reader.next();
 			 switch (element) {
 			 case XMLStreamConstants.START_ELEMENT:

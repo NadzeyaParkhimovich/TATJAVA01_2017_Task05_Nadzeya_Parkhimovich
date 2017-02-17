@@ -1,8 +1,10 @@
-package com.epam.xmlparsers.sax;
+package com.epam.xmlparsers.parsers.sax;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
@@ -12,25 +14,27 @@ import com.epam.xmlparsers.bean.Food;
 import com.epam.xmlparsers.bean.MenuTagName;
 
 
-public class MenuSaxHandler extends DefaultHandler {  
+public class SaxMenuHandler extends DefaultHandler {  
+	
+	private static final Logger LOG = LogManager.getRootLogger();
 	
 	private ArrayList<Food> foodList;
-	private HashMap<String, ArrayList> menu = new HashMap<String, ArrayList>();
+	private HashMap<String, ArrayList<Food>> menu = new HashMap<String, ArrayList<Food>>();
 	private Food food;  
 	private StringBuilder text;
 	private String type;
 
-	public HashMap<String, ArrayList> getMenu() { 
+	public HashMap<String, ArrayList<Food>> getMenu() { 
 		return menu;  
 	} 
 
 	public void startDocument() throws SAXException {
-		System.out.println("Parsing started.");
+		LOG.trace("Parsing started.");
 	}
 	
 	public void endDocument() throws SAXException {
-		System.out.println("Parsing ended.");
-	} 
+		LOG.trace("Parsing ended.");
+	}
 
 	public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
 		
@@ -80,16 +84,16 @@ public class MenuSaxHandler extends DefaultHandler {
 		}  
 	} 
 
-   public void warning(SAXParseException exception) {
-	   System.err.println("WARNING: line " + exception.getLineNumber() + ": " + exception.getMessage());
+   public void warning(SAXParseException e) {
+	   LOG.warn(e);
    } 
 
-   public void error(SAXParseException exception) {
-	   System.err.println("ERROR: line " + exception.getLineNumber() + ": " + exception.getMessage());
+   public void error(SAXParseException e) {
+	   LOG.error(e);
    } 
 
-   public void fatalError(SAXParseException exception) throws SAXException {
-	   System.err.println("FATAL: line " + exception.getLineNumber() + ": " + exception.getMessage());
-	   throw (exception);
+   public void fatalError(SAXParseException e) throws SAXException {
+	   LOG.fatal(e);
+	   throw (e);
    }
 }

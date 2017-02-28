@@ -1,6 +1,6 @@
 package com.epam.xmlparsers.bean;
 
-public class Food {
+public class Food implements Serializable {
 	
 	private String name;
 	private String description;
